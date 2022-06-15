@@ -59,7 +59,16 @@ app.put('/updateEntry', (req, res) => {
     .catch(err => console.log(err))
 })  
 
-app.delete('/deleteEntry', (req, res) => {})
+app.delete('/deleteEntry', (req, res) => {
+    db.collection('superdevs').deleteOne(
+        {name: req.body.name}
+    )
+    .then(result => {
+        console.log('Entry Deleted')
+        res.json('Entry Deleted')
+    })
+    .catch(err => console.log(err))
+})
 
 //SET UP LOCALHOST ON PORT
 app.listen(process.env.PORT || PORT, () => {
