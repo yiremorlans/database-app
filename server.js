@@ -39,8 +39,25 @@ app.post('/api', (req, res) => {
 })
 
 app.put('/updateEntry', (req, res) => {
-
-})
+    console.log(req.body)
+    Object.keys(req.body).forEach(key => {
+        if (req.body[key] === null || req.body[key] === undefined || req.body[key] === '') {
+            delete req.body[key]
+        }
+    }) 
+    console.log(req.body)
+    db.collection('superdevs').findOneAndUpdate(
+        {name: req.body.name},
+        {
+            $set: req.body
+        }
+    )
+    .then(result => {
+        console.log(result)
+        res.json('Success')
+    })
+    .catch(err => console.log(err))
+})  
 
 app.delete('/deleteEntry', (req, res) => {})
 

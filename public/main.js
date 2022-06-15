@@ -1,5 +1,3 @@
-const req = require("express/lib/request")
-
 document.getElementById('updateButton').addEventListener('click', updateEntry)
 
 async function updateEntry() {
@@ -18,6 +16,7 @@ async function updateEntry() {
             })
         })
         const data = await res.json()
+        console.log(data)
         location.reload()
     } catch(err) {
         console.log(err)
